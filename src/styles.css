@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --icterine: #f0ec57ff;
+    --smoky-black: #0b0a07ff;
+    --reseda-green: #748067ff;
+    --celestial-blue: #1e91d6ff;
+    --columbia-blue: #bfd7eaff;
+}
+
+header {
+    padding: 40px;
+    font-size: 24px;
+    background-color: var(--celestial-blue);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+form input {
+    font-size: inherit;
+    border: none;
+    padding: 5px 10px;
+}
+
+form input[type='submit'] {
+    background-color: var(--icterine);
+    cursor: pointer;
+}
