@@ -6,25 +6,21 @@ export default async function getApiData(location) {
         );
 
         const responseObj = await response.json();
-        console.log(responseObj);
-        const { address, description, currentConditions, resolvedAddress } =
-            responseObj;
+        const { description, currentConditions, resolvedAddress } = responseObj;
 
-        const { conditions, feelslike, humidity, icon, temp } =
+        const { conditions, feelslike, humidity, temp, windspeed } =
             currentConditions;
 
         return {
-            address,
             description,
-            currentConditions,
             resolvedAddress,
+            conditions,
             feelslike,
             humidity,
-            icon,
             temp,
-            conditions,
+            windspeed,
         };
     } catch (error) {
-        console.log(error);
+        return error;
     }
 }

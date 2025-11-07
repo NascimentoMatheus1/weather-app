@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 :root {
     --icterine: #f0ec57ff;
     --smoky-black: #0b0a07ff;
@@ -29,4 +33,29 @@ form input {
 form input[type='submit'] {
     background-color: var(--icterine);
     cursor: pointer;
+}
+
+main {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.temps{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.temp{
+    font-size: 10rem;
+    font-weight: 500;
 }

@@ -1,6 +1,12 @@
+import getApiData from './processJson';
+
 export default class UI {
     static initialLoad() {
-        console.log('funcionando');
+        UI.loadEventsListeners();
+        const data = getApiData('Tokyo, Japan');
+        data.then((response) => {
+            UI.showApiData(response);
+        });
     }
 
     static loadEventsListeners() {
@@ -10,5 +16,79 @@ export default class UI {
 
     static checkCityName(e) {
         e.preventDefault();
+    }
+
+    static showApiData(data) {
+        const main = document.querySelector('main');
+        main.innerHTML = '';
+        const contentElem = UI.createContentElement(data);
+        main.append(contentElem);
+    }
+
+    static createContentElement(data) {
+        const information = UI.createHTMLElement('div', {
+            class: 'information',
+        });
+        ['conditions', 'resolvedAddress'].forEach((key) => {
+            if (data[key]) {
+                const p = UI.createHTMLElement(
+                    'p',
+                    { class: key },
+                    data[key]
+                );
+                information.append(p);
+            }
+        });
+
+        const temps = UI.createHTMLElement('div', { class: 'temps' });
+        const temp = UI.createHTMLElement(
+            'p',
+            { class: 'temp' },
+            data.temp
+        );
+        temps.append(temp);
+
+        const otherTemp = UI.createHTMLElement('div', { class: 'otherTemp' });
+        ['feelslike', 'humidity', 'windspeed'].forEach((key) => {
+            if (data[key]) {
+                const p = UI.createHTMLElement(
+                    'p',
+                    { class: key },
+                    `${data[key]}`
+                );
+                otherTemp.append(p);
+            }
+        });
+        temps.append(otherTemp);
+
+        const content = UI.createHTMLElement('div', { class: 'content' });
+        content.append(information);
+        content.append(temps);
+
+        if (data.description) {
+            const description = UI.createHTMLElement(
+                'p',
+                { class: 'description' },
+                data.description
+            );
+            content.append(description);
+        }
+        return content;
+    }
+
+    static createHTMLElement(tagName, attributes = {}, textContent = '') {
+        const element = document.createElement(tagName);
+
+        for (const key in attributes) {
+            if (Object.hasOwnProperty.call(attributes, key)) {
+                element.setAttribute(key, attributes[key]);
+            }
+        }
+
+        if (textContent) {
+            element.textContent = textContent;
+        }
+
+        return element;
     }
 }
