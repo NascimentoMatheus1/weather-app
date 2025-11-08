@@ -1,5 +1,4 @@
-export default async function getApiData(location, system = 'imperial') {
-    let data = undefined;
+export default async function getApiData(location) {
     try {
         const apiKey = 'K9K6MMMF255RFLKSLGD7GB27L';
         const response = await fetch(
@@ -12,10 +11,10 @@ export default async function getApiData(location, system = 'imperial') {
         const { description, currentConditions, resolvedAddress } =
             responseJSON;
 
-        let { conditions, feelslike, humidity, temp, windspeed } =
+        const { conditions, feelslike, humidity, temp, windspeed } =
             currentConditions;
 
-        data = {
+        const data = {
             description,
             resolvedAddress,
             conditions,

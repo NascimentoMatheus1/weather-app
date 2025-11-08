@@ -4,21 +4,25 @@
 }
 
 html {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 :root {
     --icterine: #f0ec57ff;
-    --smoky-black: #0b0a07ff;
-    --reseda-green: #748067ff;
     --celestial-blue: #1e91d6ff;
-    --columbia-blue: #bfd7eaff;
+    --oxford-blue: #001d4aff;
+    --indigo-dye: #27476eff;
+}
+
+body{
+    background-color: var(--celestial-blue);
+    color: white;
 }
 
 header {
     padding: 40px;
     font-size: 24px;
-    background-color: var(--celestial-blue);
+    background-color: var(--oxford-blue);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -26,6 +30,7 @@ header {
 
 form input {
     font-size: inherit;
+    font-family: inherit;
     border: none;
     padding: 5px 10px;
 }
@@ -39,15 +44,6 @@ form input[type='submit'] {
     color: red;
     font-size: 20px;
     text-align: start;
-}
-
-button{
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    background-color: var(--columbia-blue);
-    font-size: inherit;
-    cursor: pointer;
 }
 
 main {

@@ -3,12 +3,7 @@ import getApiData from './processJson';
 export default class UI {
     static async initialLoad() {
         UI.loadEventsListeners();
-        const data = await getApiData('Tokyo, Japan');
-        if (data) {
-            UI.showApiData(data);
-        } else {
-            UI.showErroMessage('Not found!!!');
-        }
+        UI.apiCall('Tokyo, Japan');
     }
 
     static loadEventsListeners() {
@@ -16,19 +11,23 @@ export default class UI {
         form.addEventListener('submit', UI.checkCityName);
     }
 
-    static async checkCityName(e) {
-        e.preventDefault();
-        const main = document.querySelector('main');
-        main.innerHTML = '';
-
-        const cityNameInput = document.getElementById('cityName');
-
-        const data = await getApiData(cityNameInput.value);
+    static async apiCall(location) {
+        const data = await getApiData(location);
         if (data) {
             UI.showApiData(data);
         } else {
             UI.showErroMessage('Not found!!!');
         }
+    }
+
+    static checkCityName(e) {
+        e.preventDefault();
+        const main = document.querySelector('main');
+        main.innerHTML = '';
+        UI.showErroMessage('');
+
+        const cityNameInput = document.getElementById('cityName');
+        UI.apiCall(cityNameInput.value);
     }
 
     static showErroMessage(message) {
