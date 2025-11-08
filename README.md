@@ -1,5 +1,5 @@
 # Weather app
-- Um weather app (aplicativo de clima) é um aplicativo ou site que fornece informações meteorológicas em tempo real e previsões do tempo para localizações específicas.
+- Um weather app (aplicativo de clima) é um aplicativo que fornece informações meteorológicas em tempo real e previsões do tempo para localizações específicas.
 - As informações estão em inglês e no sistema imperial.
 - [Visualização (Live Preview)](https://nascimentomatheus1.github.io/weather-app/)
  ## Como utilizar:
