@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-html{
+html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -35,6 +35,21 @@ form input[type='submit'] {
     cursor: pointer;
 }
 
+#error {
+    color: red;
+    font-size: 20px;
+    text-align: start;
+}
+
+button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--columbia-blue);
+    font-size: inherit;
+    cursor: pointer;
+}
+
 main {
     margin-top: 5rem;
     display: flex;
@@ -49,13 +64,41 @@ main {
     font-weight: 500;
 }
 
-.temps{
+.temps {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.temp{
+.temp {
     font-size: 10rem;
-    font-weight: 500;
+    font-weight: 400;
+}
+
+.temp::after{
+    content: '\2109';
+}
+
+.feelslike::before{
+    content: 'Feels Like ';
+}
+
+.feelslike::after{
+    content: '\2109';
+}
+
+.humidity::before{
+    content: 'Humidity ';
+}
+
+.humidity::after{
+    content: '\0025';
+}
+
+.windspeed::before{
+    content: 'Wind ';
+}
+
+.windspeed::after{
+    content: ' MPM';
 }

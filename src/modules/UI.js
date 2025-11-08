@@ -1,12 +1,14 @@
 import getApiData from './processJson';
 
 export default class UI {
-    static initialLoad() {
+    static async initialLoad() {
         UI.loadEventsListeners();
-        const data = getApiData('Tokyo, Japan');
-        data.then((response) => {
-            UI.showApiData(response);
-        });
+        const data = await getApiData('Tokyo, Japan');
+        if (data) {
+            UI.showApiData(data);
+        } else {
+            UI.showErroMessage('Not found!!!');
+        }
     }
 
     static loadEventsListeners() {
@@ -14,8 +16,24 @@ export default class UI {
         form.addEventListener('submit', UI.checkCityName);
     }
 
-    static checkCityName(e) {
+    static async checkCityName(e) {
         e.preventDefault();
+        const main = document.querySelector('main');
+        main.innerHTML = '';
+
+        const cityNameInput = document.getElementById('cityName');
+
+        const data = await getApiData(cityNameInput.value);
+        if (data) {
+            UI.showApiData(data);
+        } else {
+            UI.showErroMessage('Not found!!!');
+        }
+    }
+
+    static showErroMessage(message) {
+        const error = document.getElementById('error');
+        error.innerText = message;
     }
 
     static showApiData(data) {
@@ -31,21 +49,13 @@ export default class UI {
         });
         ['conditions', 'resolvedAddress'].forEach((key) => {
             if (data[key]) {
-                const p = UI.createHTMLElement(
-                    'p',
-                    { class: key },
-                    data[key]
-                );
+                const p = UI.createHTMLElement('p', { class: key }, data[key]);
                 information.append(p);
             }
         });
 
         const temps = UI.createHTMLElement('div', { class: 'temps' });
-        const temp = UI.createHTMLElement(
-            'p',
-            { class: 'temp' },
-            data.temp
-        );
+        const temp = UI.createHTMLElement('p', { class: 'temp' }, data.temp);
         temps.append(temp);
 
         const otherTemp = UI.createHTMLElement('div', { class: 'otherTemp' });

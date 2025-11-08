@@ -1,17 +1,21 @@
-export default async function getApiData(location) {
+export default async function getApiData(location, system = 'imperial') {
+    let data = undefined;
     try {
         const apiKey = 'K9K6MMMF255RFLKSLGD7GB27L';
         const response = await fetch(
             `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${apiKey}`
         );
+        if (!response.ok) {
+            throw new Error('Something went wrong');
+        }
+        const responseJSON = await response.json();
+        const { description, currentConditions, resolvedAddress } =
+            responseJSON;
 
-        const responseObj = await response.json();
-        const { description, currentConditions, resolvedAddress } = responseObj;
-
-        const { conditions, feelslike, humidity, temp, windspeed } =
+        let { conditions, feelslike, humidity, temp, windspeed } =
             currentConditions;
 
-        return {
+        data = {
             description,
             resolvedAddress,
             conditions,
@@ -20,7 +24,8 @@ export default async function getApiData(location) {
             temp,
             windspeed,
         };
+        return data;
     } catch (error) {
-        return error;
+        console.log(error.message);
     }
 }
